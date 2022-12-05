@@ -1,2 +1,2 @@
 org.springframework.test.context.TestExecutionListener = \
-	mockjaxrs2.testapp.MockJerseyTestExecutionListener
+	com.ebay.tests.jersey.SpringJerseyTestExecutionListener
