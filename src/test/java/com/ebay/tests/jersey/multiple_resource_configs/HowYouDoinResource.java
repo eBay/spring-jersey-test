@@ -1,4 +1,4 @@
-package com.ebay.tests.jersey.multiple_resources;
+package com.ebay.tests.jersey.multiple_resource_configs;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

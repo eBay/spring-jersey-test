@@ -1,16 +1,16 @@
-package com.ebay.tests.jersey.multiple_resources;
+package com.ebay.tests.jersey.multiple_resource_configs;
 
 import javax.annotation.PostConstruct;
 import javax.ws.rs.ApplicationPath;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.context.annotation.Configuration;
 
-@ApplicationPath("/v1")
+@ApplicationPath("goodbye")
 @Configuration
-public class HelloResourceConfig extends ResourceConfig {
+public class GoodbyeResourceConfig extends ResourceConfig {
 
     @PostConstruct
     public void init() {
-        register(HelloResource.class);
+        register(GoodbyeResource.class);
     }
 }

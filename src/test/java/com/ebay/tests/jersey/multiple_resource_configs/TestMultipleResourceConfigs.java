@@ -1,4 +1,4 @@
-package com.ebay.tests.jersey.multiple_resources;
+package com.ebay.tests.jersey.multiple_resource_configs;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -27,8 +27,9 @@ public class TestMultipleResourceConfigs {
 
         @Test
         public void shouldNotSayHello() {
-            Response response = target.path("hello/greet").request().get();
-            Assertions.assertThat(response.getStatus()).isEqualTo(404);
+            try (Response response = target.path("hello/greet").request().get()) {
+                Assertions.assertThat(response.getStatus()).isEqualTo(404);
+            }
         }
     }
 
@@ -47,8 +48,9 @@ public class TestMultipleResourceConfigs {
 
         @Test
         public void shouldNotSayGoodbye() {
-            Response response = target.path("goodbye/greet").request().get();
-            Assertions.assertThat(response.getStatus()).isEqualTo(404);
+            try (Response response = target.path("goodbye/greet").request().get()) {
+                Assertions.assertThat(response.getStatus()).isEqualTo(404);
+            }
         }
     }
 
