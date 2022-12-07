@@ -1,11 +1,9 @@
 package com.ebay.tests.jersey;
 
-import java.lang.reflect.Proxy;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 import javax.ws.rs.Path;
-import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.ext.Provider;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -13,10 +11,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.NoUniqueBeanDefinitionException;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Primary;
 
 public class SpringJerseyTestAutoConfiguration implements ApplicationContextAware {
 
@@ -26,6 +24,7 @@ public class SpringJerseyTestAutoConfiguration implements ApplicationContextAwar
     private ApplicationContext ctx;
 
     @Bean
+    @ConditionalOnMissingBean
     public SpringJerseyTestInstance jerseyTest() {
         ResourceConfig rc = getOrCreateResourceConfig();
         rc.property("contextConfig", ctx);
@@ -33,14 +32,17 @@ public class SpringJerseyTestAutoConfiguration implements ApplicationContextAwar
     }
 
     @Bean
-    @ConditionalOnBean(SpringJerseyTestInstance.class)
-    public TestWebTarget webTarget(SpringJerseyTestInstance djt) {
-        return (TestWebTarget) Proxy.newProxyInstance(this.getClass().getClassLoader(),
-            new Class[]{TestWebTarget.class},
-            (proxy, method, args) -> {
-                WebTarget target = djt.target();
-                return method.invoke(target, args);
-            });
+    @ConditionalOnMissingBean
+    public TestWebTargetFactory testWebTargetFactory() {
+        return new TestWebTargetFactory();
+    }
+
+    @Bean
+    @ConditionalOnBean(value = {SpringJerseyTestInstance.class, TestWebTargetFactory.class})
+    @ConditionalOnMissingBean
+    public TestWebTarget targetWebTarget(TestWebTargetFactory testWebTargetFactory,
+        SpringJerseyTestInstance jerseyTestInstance) {
+        return testWebTargetFactory.create(jerseyTestInstance);
     }
 
     @Override
