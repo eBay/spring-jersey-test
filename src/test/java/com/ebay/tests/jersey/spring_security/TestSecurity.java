@@ -1,11 +1,11 @@
 package com.ebay.tests.jersey.spring_security;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.ebay.tests.jersey.SpringJerseyTest;
+import com.ebay.tests.jersey.TestWebTarget;
 import javax.ws.rs.ProcessingException;
-import javax.ws.rs.client.WebTarget;
 import org.glassfish.jersey.test.TestProperties;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 public class TestSecurity {
 
     @Autowired
-    WebTarget target;
+    TestWebTarget target;
 
     @Test
     @WithMockUser(username = "admin", authorities = {"https://api.ebay.com/oauth/scope/@public"})

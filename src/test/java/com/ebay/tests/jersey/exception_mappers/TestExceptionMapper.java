@@ -1,9 +1,9 @@
 package com.ebay.tests.jersey.exception_mappers;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import com.ebay.tests.jersey.SpringJerseyTest;
-import javax.ws.rs.client.WebTarget;
+import com.ebay.tests.jersey.TestWebTarget;
 import javax.ws.rs.core.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -18,7 +18,7 @@ public class TestExceptionMapper {
     public class TestExceptionMapperAutoRegister {
 
         @Autowired
-        WebTarget target;
+        TestWebTarget target;
 
         @Test
         void shouldMapException() {
@@ -36,7 +36,7 @@ public class TestExceptionMapper {
     public class TestExceptionMapperApplicationRegister {
 
         @Autowired
-        WebTarget target;
+        TestWebTarget target;
 
         @Test
         void shouldMapException() {
@@ -54,7 +54,7 @@ public class TestExceptionMapper {
     public class TestExceptionMapperExplicitDiscovery {
 
         @Autowired
-        WebTarget target;
+        TestWebTarget target;
 
         @Test
         void shouldMapException() {
@@ -72,7 +72,7 @@ public class TestExceptionMapper {
 //    public class TestExceptionMapperShouldntDiscover {
 //
 //        @Autowired
-//        WebTarget target;
+//        TestWebTarget target;
 //
 //        @Test
 //        void shouldNotMapException() {

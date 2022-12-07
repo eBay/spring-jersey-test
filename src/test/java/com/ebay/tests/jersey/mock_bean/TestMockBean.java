@@ -1,12 +1,12 @@
 package com.ebay.tests.jersey.mock_bean;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.when;
 
 import com.ebay.tests.jersey.SpringJerseyTest;
+import com.ebay.tests.jersey.TestWebTarget;
 import javax.ws.rs.ProcessingException;
-import javax.ws.rs.client.WebTarget;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public class TestMockBean {
     public class TestWithRealBeanInContextType2 {
 
         @Autowired
-        WebTarget target;
+        TestWebTarget target;
 
         @Test
         void shouldFailOnRealCall() {
@@ -44,7 +44,7 @@ public class TestMockBean {
     public class TestWithRealBeanInContext {
 
         @Autowired
-        WebTarget target;
+        TestWebTarget target;
 
         @Test
         void shouldFailOnRealCall() {
@@ -63,7 +63,7 @@ public class TestMockBean {
     public class TestWithMock {
 
         @Autowired
-        WebTarget target;
+        TestWebTarget target;
 
         @MockBean
         ExpensiveService expensiveService;

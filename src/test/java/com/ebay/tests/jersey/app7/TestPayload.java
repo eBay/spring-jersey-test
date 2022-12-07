@@ -1,12 +1,12 @@
 package com.ebay.tests.jersey.app7;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.ebay.tests.jersey.SpringJerseyTest;
+import com.ebay.tests.jersey.TestWebTarget;
 import javax.ws.rs.NotSupportedException;
 import javax.ws.rs.client.Entity;
-import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import org.glassfish.jersey.test.TestProperties;
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class TestPayload {
 
     @Autowired
-    WebTarget target;
+    TestWebTarget target;
 
     @Test
     void shouldSendAndReceivePayloadJson() {

@@ -1,9 +1,9 @@
 package com.ebay.tests.jersey.multiple_resource_configs;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import com.ebay.tests.jersey.SpringJerseyTest;
-import javax.ws.rs.client.WebTarget;
+import com.ebay.tests.jersey.TestWebTarget;
 import javax.ws.rs.core.Response;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Nested;
@@ -17,7 +17,7 @@ public class TestMultipleResourceConfigs {
     public class TestGoodbyeResource {
 
         @Autowired
-        WebTarget target;
+        TestWebTarget target;
 
         @Test
         void shouldSayGoodbye() {
@@ -38,7 +38,7 @@ public class TestMultipleResourceConfigs {
     public class TestHelloResource {
 
         @Autowired
-        WebTarget target;
+        TestWebTarget target;
 
         @Test
         public void shouldGetHello() {
@@ -59,7 +59,7 @@ public class TestMultipleResourceConfigs {
     public class TestTwoResources {
 
         @Autowired
-        WebTarget target;
+        TestWebTarget target;
 
         @Test
         void shouldSayHello() {
@@ -79,7 +79,7 @@ public class TestMultipleResourceConfigs {
     public class TestNonComponentResource {
 
         @Autowired
-        WebTarget target;
+        TestWebTarget target;
 
         @Test
         void shouldAskHowyoudoin() {

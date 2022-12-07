@@ -1,10 +1,9 @@
 package com.ebay.tests.jersey.auto_discovery_resource;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import com.ebay.tests.jersey.SpringJerseyTest;
-import javax.ws.rs.client.WebTarget;
-import org.assertj.core.api.Assertions;
+import com.ebay.tests.jersey.TestWebTarget;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -12,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class TestAutoDiscoverSingleResourceConfig {
 
     @Autowired
-    WebTarget target;
+    TestWebTarget target;
 
     @Test
     void shouldSayHello() {
@@ -23,6 +22,12 @@ public class TestAutoDiscoverSingleResourceConfig {
     @Test
     public void shouldGetHello() {
         String response = target.path("hello/greet").request().get(String.class);
-        Assertions.assertThat(response).isEqualTo("Hello, world!");
+        assertThat(response).isEqualTo("Hello, world!");
+    }
+
+    @Test
+    public void shouldHaveBothRegistered() {
+        assertThat(target.application().getClasses())
+            .containsExactly(HelloResource.class, GoodbyeResource.class);
     }
 }

@@ -1,9 +1,9 @@
 package com.ebay.tests.jersey.auto_discovery_providers;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import com.ebay.tests.jersey.SpringJerseyTest;
-import javax.ws.rs.client.WebTarget;
+import com.ebay.tests.jersey.TestWebTarget;
 import javax.ws.rs.core.Response;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class TestAutoDiscoverResourcesAndProvidersOnly {
 
     @Autowired
-    WebTarget target;
+    TestWebTarget target;
 
     @Test
     void shouldMapException() {
