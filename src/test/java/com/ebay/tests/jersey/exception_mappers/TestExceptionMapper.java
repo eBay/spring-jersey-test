@@ -1,7 +1,6 @@
 package com.ebay.tests.jersey.exception_mappers;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import com.ebay.tests.jersey.SpringJerseyTest;
 import javax.ws.rs.client.WebTarget;
@@ -23,10 +22,11 @@ public class TestExceptionMapper {
 
         @Test
         void shouldMapException() {
-            Response response = target.path("/compute/err").request().get();
-            assertThat(response.getStatus()).isEqualTo(500);
-            String entity = response.readEntity(String.class);
-            assertThat(entity).isEqualTo("err: problem!");
+            try (Response response = target.path("/compute/err").request().get()) {
+                assertThat(response.getStatus()).isEqualTo(500);
+                String entity = response.readEntity(String.class);
+                assertThat(entity).isEqualTo("err: problem!");
+            }
         }
     }
 
@@ -40,10 +40,11 @@ public class TestExceptionMapper {
 
         @Test
         void shouldMapException() {
-            Response response = target.path("/compute/err").request().get();
-            assertThat(response.getStatus()).isEqualTo(500);
-            String entity = response.readEntity(String.class);
-            assertThat(entity).isEqualTo("err: problem!");
+            try (Response response = target.path("/compute/err").request().get()) {
+                assertThat(response.getStatus()).isEqualTo(500);
+                String entity = response.readEntity(String.class);
+                assertThat(entity).isEqualTo("err: problem!");
+            }
         }
     }
 
@@ -57,10 +58,11 @@ public class TestExceptionMapper {
 
         @Test
         void shouldMapException() {
-            Response response = target.path("/compute/err").request().get();
-            assertThat(response.getStatus()).isEqualTo(500);
-            String entity = response.readEntity(String.class);
-            assertThat(entity).isEqualTo("err: problem!");
+            try (Response response = target.path("/compute/err").request().get()) {
+                assertThat(response.getStatus()).isEqualTo(500);
+                String entity = response.readEntity(String.class);
+                assertThat(entity).isEqualTo("err: problem!");
+            }
         }
     }
 

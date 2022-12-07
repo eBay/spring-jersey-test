@@ -16,9 +16,10 @@ public class TestAutoDiscoverResourcesAndProvidersOnly {
 
     @Test
     void shouldMapException() {
-        Response response = target.path("/compute/err").request().get();
-        assertThat(response.getStatus()).isEqualTo(500);
-        String entity = response.readEntity(String.class);
-        assertThat(entity).isEqualTo("err: problem!");
+        try (Response response = target.path("/compute/err").request().get()) {
+            assertThat(response.getStatus()).isEqualTo(500);
+            String entity = response.readEntity(String.class);
+            assertThat(entity).isEqualTo("err: problem!");
+        }
     }
 }
