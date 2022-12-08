@@ -28,6 +28,6 @@ public class TestAutoDiscoverSingleResourceConfig {
     @Test
     public void shouldHaveBothRegistered() {
         assertThat(target.application().getClasses())
-            .containsExactly(HelloResource.class, GoodbyeResource.class);
+            .containsExactlyInAnyOrder(HelloResource.class, GoodbyeResource.class);
     }
 }
