@@ -10,7 +10,7 @@ public class ComputeResourceConfig extends ResourceConfig {
 
     public ComputeResourceConfig() {
         register(ComputeResource.class);
-        register(AllExceptionMapper.class);
+        register(ProviderRuntimeExceptionMapper.class);
     }
 
 }

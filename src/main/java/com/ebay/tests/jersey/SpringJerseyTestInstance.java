@@ -1,6 +1,6 @@
 package com.ebay.tests.jersey;
 
-import java.util.Collection;
+import java.util.Arrays;
 import javax.ws.rs.core.Application;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
@@ -18,12 +18,14 @@ public class SpringJerseyTestInstance extends JerseyTest {
     private boolean prepared = false;
     private final ResourceConfig resourceConfig;
 
-    protected void prepare(Collection<Class<?>> components) {
+    protected void prepare(Class<?>[] components) {
         synchronized (this) {
             if (prepared) {
                 return;
             }
-            components.forEach(resourceConfig::register);
+            Arrays.stream(components)
+                .filter(c -> !resourceConfig.isRegistered(c))
+                .forEach(resourceConfig::register);
             prepared = true;
         }
     }

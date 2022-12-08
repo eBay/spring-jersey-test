@@ -7,10 +7,10 @@ import org.springframework.stereotype.Component;
 
 @Provider
 @Component
-public class AllExceptionMapper implements ExceptionMapper<Exception> {
+public class ProviderRuntimeExceptionMapper implements ExceptionMapper<RuntimeException> {
 
     @Override
-    public Response toResponse(Exception exception) {
-        return Response.serverError().entity("err: "+exception.getMessage()).build();
+    public Response toResponse(RuntimeException exception) {
+        return Response.serverError().entity("runtime err: "+exception.getMessage()).build();
     }
 }

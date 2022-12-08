@@ -1,9 +1,5 @@
 package com.ebay.tests.jersey;
 
-import java.util.Arrays;
-import java.util.Set;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
@@ -48,20 +44,9 @@ public class SpringJerseyTestExecutionListener extends AbstractTestExecutionList
             return;
         }
 
-        ApplicationContext ctx = testContext.getApplicationContext();
-        Predicate<Class<?>> beanNotExists = c -> ctx.getBeansOfType(c).isEmpty();
-
-        // Find additional components that are not @Component beans. @Component beans
-        // that available in the current context are automatically added to the Jersey
-        // context - additional ones needed to be registered explicitly.
-        // We don't want to register all components - to avoid double registration of
-        // providers that were already registered.
-        Set<Class<?>> components = Arrays.stream(mockJerseyTest.components())
-            .filter(beanNotExists)
-            .collect(Collectors.toSet());
-
-        log.debug("Detected the following non Spring beans components to add: {}", components);
-        instance.prepare(components);
+        // Find additional components that might not be @Component or @Provider beans.
+        // The prepare() method will remove any beans that were already registered.
+        instance.prepare(mockJerseyTest.components());
     }
 
     private SpringJerseyTestInstance getJerseyTest(TestContext testContext) {

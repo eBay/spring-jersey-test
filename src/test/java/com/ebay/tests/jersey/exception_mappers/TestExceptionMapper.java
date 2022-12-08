@@ -1,9 +1,11 @@
 package com.ebay.tests.jersey.exception_mappers;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.ebay.tests.jersey.SpringJerseyTest;
 import com.ebay.tests.jersey.TestWebTarget;
+import java.io.IOException;
 import javax.ws.rs.core.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -25,8 +27,15 @@ public class TestExceptionMapper {
             try (Response response = target.path("/compute/err").request().get()) {
                 assertThat(response.getStatus()).isEqualTo(500);
                 String entity = response.readEntity(String.class);
-                assertThat(entity).isEqualTo("err: problem!");
+                assertThat(entity).isEqualTo("runtime err: problem!");
             }
+        }
+
+        @Test
+        void shouldNotMapNonProviderIOException() {
+            assertThatThrownBy(()->target.path("/compute/ioerr").request().get())
+                .hasRootCauseExactlyInstanceOf(IOException.class)
+                .hasRootCauseMessage("IO problem!");
         }
     }
 
@@ -39,16 +48,16 @@ public class TestExceptionMapper {
         TestWebTarget target;
 
         @Test
-        void shouldMapException() {
+        void shouldMapRuntimeException() {
             try (Response response = target.path("/compute/err").request().get()) {
                 assertThat(response.getStatus()).isEqualTo(500);
                 String entity = response.readEntity(String.class);
-                assertThat(entity).isEqualTo("err: problem!");
+                assertThat(entity).isEqualTo("runtime err: problem!");
             }
         }
     }
 
-    @SpringJerseyTest(components = {ComputeResource.class, AllExceptionMapper.class})
+    @SpringJerseyTest(components = {ComputeResource.class, ProviderRuntimeExceptionMapper.class, NotProviderIOExceptionMapper.class})
     @Nested
     @DisplayName("Exception Mapper explicit discovery")
     public class TestExceptionMapperExplicitDiscovery {
@@ -61,10 +70,20 @@ public class TestExceptionMapper {
             try (Response response = target.path("/compute/err").request().get()) {
                 assertThat(response.getStatus()).isEqualTo(500);
                 String entity = response.readEntity(String.class);
-                assertThat(entity).isEqualTo("err: problem!");
+                assertThat(entity).isEqualTo("runtime err: problem!");
+            }
+        }
+
+        @Test
+        void shouldNonProviderMapException() {
+            try (Response response = target.path("/compute/ioerr").request().get()) {
+                assertThat(response.getStatus()).isEqualTo(500);
+                String entity = response.readEntity(String.class);
+                assertThat(entity).isEqualTo("io err: IO problem!");
             }
         }
     }
+
 
 //    @SpringJerseyTest(components = {ComputeResource.class})
 //    @Nested
