@@ -36,15 +36,16 @@ public class JerseyTypeExcludeFilter extends
     static {
         Set<Class<?>> includes = new LinkedHashSet<>();
 //        includes.add(ControllerAdvice.class);
-        includes.add(JsonComponent.class);
 //        includes.add(WebMvcConfigurer.class);
 //        includes.add(ExceptionMapper.class);
 //        includes.add(WebMvcRegistrations.class);
-        includes.add(Provider.class);
         includes.add(javax.servlet.Filter.class);
 
+        includes.add(Provider.class);
         includes.add(ContainerRequestFilter.class);
         includes.add(ContainerResponseFilter.class);
+
+        includes.add(JsonComponent.class);
 
         includes.add(FilterRegistrationBean.class);
         includes.add(DelegatingFilterProxyRegistrationBean.class);
