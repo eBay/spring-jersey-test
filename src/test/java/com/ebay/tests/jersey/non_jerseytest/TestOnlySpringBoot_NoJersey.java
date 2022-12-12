@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
  * SpringJerseyTest on the classpath
  */
 @SpringBootTest(classes = ComputeResource.class)
-public class OnlySpringBootTest {
+public class TestOnlySpringBoot_NoJersey {
 
     @Autowired
     ComputeResource computeResource;
