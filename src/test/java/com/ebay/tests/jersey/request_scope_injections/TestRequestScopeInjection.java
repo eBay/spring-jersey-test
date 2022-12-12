@@ -13,9 +13,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class TestRequestScopeInjection {
-    private List<Object> list(Object... obj) {
-        return Arrays.asList(obj);
-    }
+
+    // The test will use a custom filter com.ebay.tests.jersey.request_scope_injections.ReqFilter
+    // to echo the internal data to the client
 
     @Nested
     @SpringJerseyTest
@@ -71,6 +71,10 @@ public class TestRequestScopeInjection {
                     .containsEntry("echo", list("myheader"));
             }
         }
+    }
+
+    private List<Object> list(Object... obj) {
+        return Arrays.asList(obj);
     }
 
 
