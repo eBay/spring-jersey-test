@@ -1,8 +1,10 @@
 package com.ebay.tests.jersey;
 
+import java.lang.reflect.Proxy;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.ext.Provider;
@@ -29,6 +31,20 @@ public class SpringJerseyTestAutoConfiguration implements ApplicationContextAwar
         ResourceConfig rc = getOrCreateResourceConfig();
         rc.property("contextConfig", ctx);
         return new SpringJerseyTestInstance(rc);
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public RequestContextPopulatorFilter requestContextPopulatorFilter() {
+        return new RequestContextPopulatorFilter();
+    }
+
+    @Bean
+    @ConditionalOnBean(value = RequestContextPopulatorFilter.class)
+    public HttpServletRequest httpServletRequest(RequestContextPopulatorFilter filter) {
+        return (HttpServletRequest) Proxy.newProxyInstance(getClass().getClassLoader(),
+            new Class[]{HttpServletRequest.class},
+            (proxy, method, args) -> method.invoke(filter.getCurrentHttpRequest(), args));
     }
 
     @Bean

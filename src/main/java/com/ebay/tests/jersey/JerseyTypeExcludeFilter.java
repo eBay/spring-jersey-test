@@ -35,7 +35,9 @@ public class JerseyTypeExcludeFilter extends
 
     static {
         Set<Class<?>> includes = new LinkedHashSet<>();
-//        includes.add(ControllerAdvice.class);
+        includes.add(RequestContextPopulatorFilter.class);
+
+        //        includes.add(ControllerAdvice.class);
 //        includes.add(WebMvcConfigurer.class);
 //        includes.add(ExceptionMapper.class);
 //        includes.add(WebMvcRegistrations.class);
@@ -106,8 +108,7 @@ public class JerseyTypeExcludeFilter extends
 
     @Override
     protected Set<Class<?>> getComponentIncludes() {
-        List<Class<?>> includes = new ArrayList<>();
-        includes.addAll(Arrays.asList(this.components));
+        List<Class<?>> includes = new ArrayList<>(Arrays.asList(this.components));
         if (application != NO_APP.class) {
             includes.add(application);
         }
