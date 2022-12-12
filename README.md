@@ -26,12 +26,12 @@ All test classes must annotate the test class with `@SpringJerseyTest`, and have
 </dependenciy>
 ```
 
-## SpringJerseyTest annotation
+## `SpringJerseyTest` annotation
 
 The `@SpringJerseyTest` will mark the test as a Junit5 test that should run against an in-memory
 Jersey container. Please check the examples part for more details about the configurations.
 
-## TestWebTarget interface
+## `TestWebTarget` interface
 
 The `TestWebTarget` is an interface that extends the `WebTarget` interface, and should be injected
 into the test using `@Autowired`. The `TestWebTarget` was created for two reasons:
@@ -44,7 +44,7 @@ will allow you to access the registered Application class, or the JAX-RS parent 
 for the
 `WebTarget`.
 
-## Single Application class
+## Single `Application` class
 
 The simplest way is to just add `@SpringJerseyTest` annotation
 
