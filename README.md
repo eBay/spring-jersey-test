@@ -3,15 +3,16 @@
 Running [JerseyTests](https://eclipse-ee4j.github.io/jersey.github.io/documentation/latest/test-framework.html)
 in Spring-Boot project, easily.
 
-This tool allow to test your Jersey controllers using the JerseyTest in-memory container, with
-Spring integration, but without the fuss. You can test your JAX-RS filters, interceptors, validators
-and
-other bindings without having to run an embedded server.
+This project suppose to bring similar testing capabilities of Spring's MockMVC to JAX-RS+Spring users - 
+the ability to create a very lightweight, very customizable, yet fully functional container for your
+testing suites. You can test the controller integration with the JAX-RS filters, interceptors, validators
+and other bindings without having to run an embedded server. `@SpringBootTest` is great, in some use-cases 
+it can be slow to start and/or cumbersome to config. 
 
 # Usage
 
-All test classes must annotate the class with `@SpringJerseyTest`, and `@Autowire` `TestWebTarget`
-class.
+All test classes must annotate the test class with `@SpringJerseyTest`, and have a 
+`@Autowire TestWebTarget target;` field. Scroll down a few more lines for examples.
 
 ## Maven dependency
 
@@ -133,8 +134,8 @@ public class OrderResourceTest {
 ```
 
 This can be ideal if your application contains many operational components that are not related to
-your business logic that you want to test, that are complex to mock or slow to initiate (corporates
-with legacy heavy-weight platforms, I'm looking at you!)
+your business logic that you want to test - components that are complex to mock or slow to initiate 
+(corporates with legacy heavy-weight platforms, I'm looking at you!)
 
 ## Other use cases
 
