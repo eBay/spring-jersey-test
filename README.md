@@ -140,10 +140,10 @@ with legacy heavy-weight platforms, I'm looking at you!)
 
 Check out the unit tests for more examples:
 
-* [Exception Mappers](TBD)
-* [Spring Security](TBD)
-* [Spring bean integrations](TBD)
-* [Request Filters](TBD)
+* [Exception Mappers](src/test/java/com/ebay/tests/jersey/exception_mappers/TestExceptionMapper.java)
+* [Spring Security](src/test/java/com/ebay/tests/jersey/spring_security/TestSecurity.java)
+* [Spring bean integrations](src/test/java/com/ebay/tests/jersey/mock_bean/TestMockBean.java)
+* [Request Filters](src/test/java/com/ebay/tests/jersey/request_scope_injections/TestRequestScopeInjection.java)
 
 ---
 
