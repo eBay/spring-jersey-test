@@ -48,9 +48,10 @@ public @interface SpringJerseyTest {
 
 
     /**
+     * TODO this need to be revised
      * Determines if default filtering should be used with
-     * {@link SpringBootApplication @SpringBootApplication}. By default only
-     * {@code @Controller} (when no explicit {@link #resources() controllers} are
+     * {@link SpringBootApplication @SpringBootApplication}. By default, only
+     * {@code @Controller} (when no explicit {@link #components() controllers} are
      * defined), {@code @ControllerAdvice} and {@code WebMvcConfigurer} beans are
      * included.
      * @see #includeFilters()
