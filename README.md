@@ -18,12 +18,12 @@ All test classes must annotate the test class with `@SpringJerseyTest`, and have
 
 ```xml
 
-<dependenciy>
+<dependency>
   <artifactId>spring-jersey-test</artifactId>
   <groupId>com.ebay.tests</groupId>
   <version>0.0.1-SNAPSHOT</version>
   <scope>test</scope>
-</dependenciy>
+</dependency>
 ```
 
 ## `SpringJerseyTest` annotation
