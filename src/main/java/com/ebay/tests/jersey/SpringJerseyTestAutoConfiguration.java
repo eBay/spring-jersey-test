@@ -5,9 +5,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.Path;
 import javax.ws.rs.core.Application;
-import javax.ws.rs.ext.Provider;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -86,14 +84,6 @@ public class SpringJerseyTestAutoConfiguration implements ApplicationContextAwar
             log.warn("Found more than a single Application class: {}", appMap.keySet());
             throw new NoUniqueBeanDefinitionException(Application.class, appMap.keySet());
         }
-        Map<String, Object> resources = ctx.getBeansWithAnnotation(Path.class);
-        log.debug("Detected the following @Path resources: {}", resources.values());
-        Map<String, Object> providers = ctx.getBeansWithAnnotation(Provider.class);
-        log.debug("Detected the following @Provider classes: {}", providers.values());
-
-        ResourceConfig rc = new ResourceConfig();
-        resources.values().forEach(rc::register);
-        providers.values().forEach(rc::register);
-        return rc;
+        return new ResourceConfig();
     }
 }

@@ -46,7 +46,7 @@ public class SpringJerseyTestExecutionListener extends AbstractTestExecutionList
 
         // Find additional components that might not be @Component or @Provider beans.
         // The prepare() method will remove any beans that were already registered.
-        instance.prepare(testContext.getApplicationContext(), mockJerseyTest.components());
+        instance.prepare(testContext.getApplicationContext(), mockJerseyTest);
     }
 
     private SpringJerseyTestInstance getJerseyTest(TestContext testContext) {
