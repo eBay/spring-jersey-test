@@ -63,7 +63,7 @@ public class OrderResourceTest {
 }
 ```
 
-## Testing specific controllers and components
+## Testing Specific Controllers and Components
 
 If you want to include just specific controllers and other components, such as filters and interceptors,
 you can specify these in the `@SpringJerseyTest` annotation:
@@ -134,6 +134,7 @@ For more examples, please refer to the unit tests.
 ---
 
 **Temporary, eBay only related**
+
 Raptor walk-arounds:
 
 * Until [RAPTOR-29863](https://jirap.corp.ebay.com/browse/RAPTOR-29863) is released,
