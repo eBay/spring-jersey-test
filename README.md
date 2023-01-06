@@ -128,6 +128,7 @@ public class OrderResourceTest {
 * [Spring Security](src/test/java/com/ebay/tests/jersey/spring_security/TestSecurity.java)
 * [Spring bean integrations](src/test/java/com/ebay/tests/jersey/mock_bean/TestMockBean.java)
 * [Request Filters](src/test/java/com/ebay/tests/jersey/request_scope_injections/TestRequestScopeInjection.java)
+* [Validation JSR-303](src/test/java/com/ebay/tests/jersey/validation/TestValidation.java)
 
 For more examples, please refer to the unit tests.
 
