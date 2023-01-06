@@ -18,6 +18,37 @@ import org.springframework.context.annotation.Import;
 public class TestMockBean {
 
     /*
+   Using @MockBean to mock required beans in the context
+    */
+    @SpringJerseyTest
+    @Nested
+    public class TestWithMock {
+
+        @Autowired
+        TestWebTarget target;
+
+        @MockBean
+        ExpensiveService expensiveService;
+
+        @Test
+        void shouldCallMock() {
+            when(expensiveService.computeSomethingExpensive()).thenReturn("$$$$");
+
+            String response = target.path("compute/expensive").request().get(String.class);
+            assertThat(response).isEqualTo("$$$$");
+        }
+
+        @Test
+        void shouldFailOnRealCall() {
+            when(expensiveService.computeSomethingExpensive()).thenCallRealMethod();
+
+            assertThatThrownBy(() -> target.path("compute/expensive").request().get())
+                .isInstanceOf(ProcessingException.class)
+                .hasRootCauseMessage("Too expensive to compute in a unitest");
+        }
+    }
+
+    /*
     One way to add more beans to the context
      */
     @SpringJerseyTest
@@ -54,35 +85,4 @@ public class TestMockBean {
         }
     }
 
-
-    /*
-    Using @MockBean to mock required beans in the context
-     */
-    @SpringJerseyTest
-    @Nested
-    public class TestWithMock {
-
-        @Autowired
-        TestWebTarget target;
-
-        @MockBean
-        ExpensiveService expensiveService;
-
-        @Test
-        void shouldCallMock() {
-            when(expensiveService.computeSomethingExpensive()).thenReturn("$$$$");
-
-            String response = target.path("compute/expensive").request().get(String.class);
-            assertThat(response).isEqualTo("$$$$");
-        }
-
-        @Test
-        void shouldFailOnRealCall() {
-            when(expensiveService.computeSomethingExpensive()).thenCallRealMethod();
-
-            assertThatThrownBy(() -> target.path("compute/expensive").request().get())
-                .isInstanceOf(ProcessingException.class)
-                .hasRootCauseMessage("Too expensive to compute in a unitest");
-        }
-    }
 }
