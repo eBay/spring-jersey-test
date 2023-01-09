@@ -2,11 +2,19 @@
 
 Spring Jersey Test is a project that allows you to easily
 run [JerseyTests](https://eclipse-ee4j.github.io/jersey.github.io/documentation/latest/test-framework.html)
-in your Spring Boot project. This project brings the testing capabilities of Spring's MockMVC to JAX-RS+Spring users,
+in your Spring Boot project. 
+
+This project brings the testing capabilities of Spring's MockMVC to JAX-RS + Spring users,
 giving you the ability to create lightweight, customizable, and fully functional containers for your testing
 suites. You can test the integration of your controllers with JAX-RS filters, interceptors,
-validators, and other bindings without the need to run an embedded server. While `@SpringBootTest`
-is useful in some cases, it can be slow to start and/or cumbersome to configure.
+validators, and other bindings without the need to run an embedded server. 
+
+## What about `@SpringBootTest`?
+
+The [@SpringBootTest](https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/test/context/SpringBootTest.html) 
+annotation can be a useful tool for testing, but in some cases can it be slow to start or complex to optimize 
+for fast startup, particularly when you only need to test a controller. In contrast, Spring Jersey Test allows 
+for more targeted testing by enabling you to run only the necessary components for your test.
 
 # Usage
 
@@ -47,7 +55,7 @@ registered through it as part of your test, you can simply use the `@SpringJerse
 shown above. Notice that if you include a context path in the `@Application` annotation, you will have 
 to omit that prefix from the client's call.
 
-## Testing with Multiple Application Classes
+## Testing with Multiple `Application` Classes
 
 If you have multiple Application classes in your app, you can specify which one you want to test by 
 including it in the `@SpringJerseyTest` annotation:
@@ -126,9 +134,9 @@ public class OrderResourceTest {
 
 * [Exception Mappers](src/test/java/com/ebay/tests/jersey/exception_mappers/TestExceptionMapper.java)
 * [Spring Security](src/test/java/com/ebay/tests/jersey/spring_security/TestSecurity.java)
-* [Spring bean integrations](src/test/java/com/ebay/tests/jersey/mock_bean/TestMockBean.java)
+* [Spring Bean Integrations](src/test/java/com/ebay/tests/jersey/mock_bean/TestMockBean.java)
 * [Request Filters](src/test/java/com/ebay/tests/jersey/request_scope_injections/TestRequestScopeInjection.java)
-* [Validation JSR-303](src/test/java/com/ebay/tests/jersey/validation/TestValidation.java)
+* [Validation (JSR-303)](src/test/java/com/ebay/tests/jersey/validation/TestValidation.java)
 
 For more examples, please refer to the unit tests.
 
