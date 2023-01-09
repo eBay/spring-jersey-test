@@ -9,14 +9,14 @@ giving you the ability to create lightweight, customizable, and fully functional
 suites. You can test the integration of your controllers with JAX-RS filters, interceptors,
 validators, and other bindings without the need to run an embedded server. 
 
-## What about `@SpringBootTest`?
+### What about `@SpringBootTest`?
 
 The [@SpringBootTest](https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/test/context/SpringBootTest.html) 
 annotation can be a useful tool for testing, but in some cases can it be slow to start or complex to optimize 
 for fast startup, particularly when you only need to test a controller. In contrast, Spring Jersey Test allows 
 for more targeted testing by enabling you to run only the necessary components for your test.
 
-# Usage
+## Usage
 
 Add the following Maven dependency to your project:
 
@@ -48,14 +48,14 @@ or the JAX-RS parent Client instance for the WebTarget.
 
 See the examples below for more details on configurations.
 
-## Testing with a Single `Application` Class
+### Testing with a Single `Application` Class
 
 If you have a single `Application` class on your classpath and want to apply all filters and components 
 registered through it as part of your test, you can simply use the `@SpringJerseyTest` annotation as 
 shown above. Notice that if you include a context path in the `@Application` annotation, you will have 
 to omit that prefix from the client's call.
 
-## Testing with Multiple `Application` Classes
+### Testing with Multiple `Application` Classes
 
 If you have multiple Application classes in your app, you can specify which one you want to test by 
 including it in the `@SpringJerseyTest` annotation:
@@ -71,7 +71,7 @@ public class OrderResourceTest {
 }
 ```
 
-## Testing Specific Controllers and Components
+### Testing Specific Controllers and Components
 
 If you want to include just specific controllers and other components, such as filters and interceptors,
 you can specify these in the `@SpringJerseyTest` annotation:
@@ -91,7 +91,7 @@ This can be particularly useful when your application contains many operational 
 not related to your business logic but may be difficult to mock or slow to initialize. This can be 
 especially helpful in cases where the application integrates with legacy or heavy-weight platforms.
 
-# Examples
+## Examples
 
 Here is an example of using the default settings of `@SpringJerseyTest` with `TestWebTarget` to test 
 an `OrderResource`:
@@ -130,7 +130,7 @@ public class OrderResourceTest {
 }
 ```
 
-## Other use cases
+### Other use cases
 
 * [Exception Mappers](src/test/java/com/ebay/tests/jersey/exception_mappers/TestExceptionMapper.java)
 * [Spring Security](src/test/java/com/ebay/tests/jersey/spring_security/TestSecurity.java)
@@ -139,6 +139,17 @@ public class OrderResourceTest {
 * [Validation (JSR-303)](src/test/java/com/ebay/tests/jersey/validation/TestValidation.java)
 
 For more examples, please refer to the unit tests.
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first
+to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+## License
+
+[Apache License 2.0](https://choosealicense.com/licenses/apache-2.0/)
 
 ---
 
