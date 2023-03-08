@@ -150,14 +150,3 @@ Please make sure to update tests as appropriate.
 ## License
 
 [Apache License 2.0](https://choosealicense.com/licenses/apache-2.0/)
-
----
-
-**Temporary, eBay only related**
-
-Raptor walk-arounds:
-
-* Until [RAPTOR-29863](https://jirap.corp.ebay.com/browse/RAPTOR-29863) is released,
-  add `@Import(RaptorSseEventListenerRegistry.class)`
-* Until [RAPTOR-29804](https://jirap.corp.ebay.com/browse/RAPTOR-29804) is accepted and release, if
-  you create a `FideliusClient` bean, make sure to annotate it as `@Lazy`
